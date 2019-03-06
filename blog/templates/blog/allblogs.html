@@ -72,7 +72,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="{% url 'allblog' %}">Blog</a>
             </li>
           </ul>
@@ -81,46 +81,27 @@
     </header>
 
     <main role="main">
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Hi, I'm Shawn</h1>
-          <p class="lead text-muted">
-            Hey, my name is Shawn Loh and I am a full stack developer. I am
-            knowledgeable in Node.JS, Express, AngularJS, React, React Native,
-            Java, C#, ASP.NET, Python, Django, MySQL, PostgreSQL
-          </p>
-          <p>
-            <a href="mailto:shawn@betterwith.tech" class="btn btn-primary my-2"
-              >Email Me</a
-            >
-          </p>
-          <img
-            src="{%static 'profile_image.jpeg'%}"
-            class="img-fluid rounded"
-            height="200px"
-            width="200px"
-          />
-        </div>
-      </section>
-
-      <div class="album py-5 bg-light">
-        <div class="container">
-          <div class="row">
-            {% for job in jobs %}
-            <div class="col-md-4 mb-4">
-              <div class="card shadow-sm h-100">
-                <img src="{{ job.image.url }}" class="card-img-top" />
-
-                <div class="card-body">
-                  <p class="card-text">
-                    {{ job.summary }}
-                  </p>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
+      <div class="container">
+        <h1 class="text-center pt-5">Blog</h1>
+        <br />
+        <br />
+        <h2>Latest Posts</h2>
+        <hr />
+        {% for blog in allblogs%}
+        <a href="{% url 'detail' blog.id %}"
+          ><h3>{{ blog.title }}</h3></a
+        >
+        {{ blog.pub_date_pretty }}
+        <br />
+        <img
+          src="{{ blog.image.url }}"
+          class="img-fluid"
+          height="200px"
+          width="200px"
+        />
+        <br />
+        <p>{{ blog.summary }}</p>
+        {% endfor %}
       </div>
     </main>
 
